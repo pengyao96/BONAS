@@ -34,7 +34,7 @@ class NeuralNet(object):
             nfeat=len(self.__dataset[0]['operations'][0]) + 1,
             ifsigmoid=ifsigmoid
         )
-        gcn = gcn.cuda()
+        gcn = gcn.cuda() if torch.cuda.is_available() else gcn
         gcn = torch.nn.DataParallel(gcn)
         optimizer = optim.Adam(gcn.parameters(),
                                lr=lr,

@@ -55,7 +55,7 @@ class Trainer:
         self.grad_clip = grad_clip
         self.build_dataloader()
         self.criterion = nn.CrossEntropyLoss()
-        self.criterion = self.criterion.cuda()
+        self.criterion = self.criterion.cuda() if torch.cuda.is_available() else self.criterion
         self.train_loader_super, self.train_loader_sub, self.valid_loader = self.build_dataloader()
 
     def build_dataloader(self):
@@ -75,17 +75,19 @@ class Trainer:
         cudnn.benchmark = True
         torch.manual_seed(self.seed)
         cudnn.enabled = True
-        torch.cuda.manual_seed(self.seed)
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed(self.seed)
 
     def build_model(self, mask):
         model = Network(self.init_channels, CIFAR_CLASSES, self.layers, mask=mask)
-        if self.parallel:
-            if distributed:
-                model = DataParallel(model.cuda(), device_ids=[torch.cuda.current_device()])
+        if torch.cuda.is_available():
+            if self.parallel:
+                if distributed:
+                    model = DataParallel(model.cuda(), device_ids=[torch.cuda.current_device()])
+                else:
+                    model = DataParallel(model.cuda())
             else:
-                model = DataParallel(model.cuda())
-        else:
-            model = model.cuda()
+                model = model.cuda()
         return model
 
     def train_and_eval(self, archs, eval_archs=None):
@@ -160,8 +162,8 @@ class Trainer:
         model.eval()
         with torch.no_grad():
             for step, (input, target) in enumerate(self.valid_loader):
-                input = Variable(input).cuda()
-                target = Variable(target).cuda(non_blocking=True)
+                input = Variable(input).cuda() if torch.cuda.is_available() else Variable(input)
+                target = Variable(target).cuda(non_blocking=True) if torch.cuda.is_available() else Variable(target)
                 logits = model(input, mask=mask)
                 loss = self.criterion(logits, target)
                 prec1, prec5 = utils.accuracy(logits, target, topk=(1, 5))
@@ -183,8 +185,8 @@ class Trainer:
                 mask = self.subnet_masks[iterative_indices[step]] if not supernet else self.supernet_mask
             else:
                 mask = random.choice(self.subnet_masks)
-            input = Variable(input).cuda()
-            target = Variable(target).cuda(non_blocking=True)
+            input = Variable(input).cuda() if torch.cuda.is_available() else Variable(input)
+            target = Variable(target).cuda(non_blocking=True) if torch.cuda.is_available() else Variable(target)
             optimizer.zero_grad()
             logits = model(input, mask=mask)
             loss = self.criterion(logits, target)

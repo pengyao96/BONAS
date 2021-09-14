@@ -90,8 +90,8 @@ class Optimizer(object):
         print(f"retrain lr time:{time_ - start}")
 
     def extract_features(self, adj, features):
-        adj = torch.Tensor(adj).cuda()
-        features = torch.Tensor(features).cuda()
+        adj = torch.Tensor(adj).cuda() if torch.cuda.is_available() else torch.Tensor(adj)
+        features = torch.Tensor(features).cuda() if torch.cuda.is_available() else torch.Tensor(features)
         with torch.no_grad():
             self.gcn.eval()
             embeddings = self.gcn(features, adj, extract_embedding=True)

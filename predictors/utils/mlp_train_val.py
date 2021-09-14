@@ -12,8 +12,8 @@ def train( model, optimizer, loss, train_loader, epoch, logging=None):
     for i_batch, sample_batched in enumerate(train_loader):
         architecture = sample_batched['architecture']
         accuracys = sample_batched['accuracy'].view(-1, 1)
-        architecture = architecture.cuda()
-        accuracys = accuracys.cuda()
+        architecture = architecture.cuda() if torch.cuda.is_available() else architecture
+        accuracys = accuracys.cuda() if torch.cuda.is_available() else accuracys
         model.train()
         optimizer.zero_grad()
         outputs = model(architecture)
@@ -53,8 +53,8 @@ def validate(model, loss, validation_loader, logging=None):
     for i_batch, sample_batched in enumerate(validation_loader):
         architecture = sample_batched['architecture']
         accuracys = sample_batched['accuracy'].view(-1, 1)
-        architecture = architecture.cuda()
-        accuracys = accuracys.cuda()
+        architecture = architecture.cuda() if torch.cuda.is_available() else architecture
+        accuracys = accuracys.cuda() if torch.cuda.is_available() else accuracys
         model.eval()
         outputs = model(architecture)
         loss_eval = loss(outputs, accuracys)

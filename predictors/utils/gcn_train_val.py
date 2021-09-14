@@ -14,7 +14,8 @@ def train(model, optimizer, loss, train_loader, epoch):
     for i_batch, sample_batched in enumerate(train_loader):
         adjs, features, accuracys = sample_batched['adjacency_matrix'], sample_batched['operations'], \
                                     sample_batched['accuracy'].view(-1, 1)
-        adjs, features, accuracys = adjs.cuda(), features.cuda(), accuracys.cuda()
+        if torch.cuda.is_available():
+            adjs, features, accuracys = adjs.cuda(), features.cuda(), accuracys.cuda()
         optimizer.zero_grad()
         outputs = model(features, adjs)
         loss_train = loss(outputs, accuracys)
@@ -47,7 +48,8 @@ def validate(model, loss, validation_loader, logging=None):
         for i_batch, sample_batched in enumerate(validation_loader):
             adjs, features, accuracys = sample_batched['adjacency_matrix'], sample_batched['operations'], \
                                         sample_batched['accuracy'].view(-1, 1)
-            adjs, features, accuracys = adjs.cuda(), features.cuda(), accuracys.cuda()
+            if torch.cuda.is_available():
+                adjs, features, accuracys = adjs.cuda(), features.cuda(), accuracys.cuda()
             outputs = model(features, adjs)
             loss_train = loss(outputs, accuracys)
             count += 1

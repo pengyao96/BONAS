@@ -48,7 +48,7 @@ class LinearRegressor():
 
         s = np.reshape(np.asarray(s), (test_X.shape[0], 1))
         if fc:
-            test_X = torch.from_numpy(test_X).cuda()
+            test_X = torch.from_numpy(test_X).cuda() if torch.cuda.is_available() else torch.from_numpy(test_X)
             test_pred = fc(test_X)
             test_pred = test_pred.cpu().data.numpy()
         else:

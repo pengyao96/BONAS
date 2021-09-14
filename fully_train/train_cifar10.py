@@ -145,8 +145,8 @@ def train(train_queue, model, criterion, optimizer):
     model.train()
 
     for step, (input, target) in enumerate(train_queue):
-        input = Variable(input).cuda()
-        target = Variable(target).cuda(async=True)
+        input = Variable(input).cuda() if torch.cuda.is_available() else Variable(input)
+        target = Variable(target).cuda(async=True) if torch.cuda.is_available() else Variable(target)
 
         optimizer.zero_grad()
         logits, logits_aux = model(input)
