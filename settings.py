@@ -24,7 +24,7 @@ search_config = dict(
 )
 
 training_config = dict(
-    train_supernet_epochs=1,
+    train_supernet_epochs=100,
     data_path=os.path.join(local_data_dir, 'data'),
     super_batch_size=64,
     sub_batch_size=128,
@@ -32,7 +32,7 @@ training_config = dict(
     momentum=0.9,
     weight_decay=3e-4,
     report_freq=50,
-    epochs=1,
+    epochs=100,
     init_channels=36,
     layers=20,
     drop_path_prob=0.2,
