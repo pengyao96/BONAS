@@ -69,7 +69,7 @@ class Runner(object):
         # build sampler
         # TODO: later add RL controller if needed
         if self.sample_method == 'random':
-            print(self.generate_num)
+            print('generate_num: ', self.generate_num)
             self.sampler = RandomSampler(generate_num=self.generate_num)
         elif self.sample_method == 'ea':
             self.sampler = EASampler(self.trained_arch_list)

@@ -165,7 +165,7 @@ class Trainer:
         with torch.no_grad():
             for step, (input, target) in enumerate(self.valid_loader):
                 input = Variable(input).cuda() if torch.cuda.is_available() else Variable(input)
-                target = Variable(target).cuda(async=True) if torch.cuda.is_available() else Variable(target)
+                target = Variable(target).cuda() if torch.cuda.is_available() else Variable(target)
                 logits = model(input, mask=mask)
                 loss = self.criterion(logits, target)
                 prec1, prec5 = utils.accuracy(logits, target, topk=(1, 5))
@@ -188,7 +188,7 @@ class Trainer:
             else:
                 mask = random.choice(self.subnet_masks)
             input = Variable(input).cuda() if torch.cuda.is_available() else Variable(input)
-            target = Variable(target).cuda(async=True) if torch.cuda.is_available() else Variable(target)
+            target = Variable(target).cuda() if torch.cuda.is_available() else Variable(target)
             optimizer.zero_grad()
             logits = model(input, mask=mask)
             loss = self.criterion(logits, target)

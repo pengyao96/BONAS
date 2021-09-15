@@ -40,7 +40,7 @@ training_config = dict(
     seed=0,
     grad_clip=5,
     parallel=False,
-    mode='random' # use uniform sampling or random sampling for subnet training
+    mode='uniform' # use uniform sampling or random sampling for subnet training
 )
 
 distributed = False

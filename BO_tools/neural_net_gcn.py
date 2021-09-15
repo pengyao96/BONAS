@@ -30,7 +30,7 @@ class NeuralNet(object):
         # Creating PT data samplers and loaders:
         train_loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size,
                                                    shuffle=True, num_workers=4, )
-        gcn = GCN(nfeat=len(self.__dataset[0]['operations'][0]) + 1, ifsigmoid=ifsigmoid)
+        gcn = GCN(nfeat=len(self.__dataset[0]['operations'][0]) + 1, ifsigmoid=ifsigmoid) # 6OP + 1Global
         if torch.cuda.is_available():
             gcn = gcn.cuda()
             gcn = torch.nn.DataParallel(gcn)

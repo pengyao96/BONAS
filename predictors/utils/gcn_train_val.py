@@ -3,8 +3,9 @@ import numpy as np
 from scipy.stats import spearmanr
 import logging
 
+
 def train(model, optimizer, loss, train_loader, epoch):
-    logging.info("training gcn ... ")
+    logging.info("epoch %d training gcn ... " % epoch)
     total_loss_train = 0
     count = 0
     total_difference = 0
