@@ -1,6 +1,6 @@
 import os
 # modify the directory paths to get started
-taskname = "supermodel_random_100"
+taskname = "0915-supermodel_random_100"
 local_root_dir = "/home/xuhang/han/nips/" # root working directory
 local_data_dir = "/home/xuhang/han/nips/data" # data root
 results_dir = "trained_results"
