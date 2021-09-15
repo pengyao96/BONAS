@@ -3,6 +3,7 @@ import os
 from settings import local_root_dir, search_config, logfile, training_config, taskname, results_dir
 from BO_tools.runner import Runner
 import argparse
+from ipdb import set_trace as st
 parser = argparse.ArgumentParser("search")
 parser.add_argument('--gpu', type=str, default='0',
                     help='gpu')

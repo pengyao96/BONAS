@@ -8,6 +8,7 @@ __pycache__/
 # C extensions
 *.so
 /data
+/trained_results
 
 # Distribution / packaging
 .Python

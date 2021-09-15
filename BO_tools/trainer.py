@@ -16,6 +16,7 @@ DataParallel = torch.nn.parallel.DistributedDataParallel if distributed else tor
 from itertools import cycle, islice
 from opendomain_utils.bn_utils import set_running_statistics
 import copy
+from ipdb import set_trace as st
 CIFAR_CLASSES = 10
 
 class Trainer:
@@ -53,21 +54,23 @@ class Trainer:
         self.drop_path_prob = drop_path_prob
         self.seed = seed
         self.grad_clip = grad_clip
-        self.build_dataloader()
+        # self.build_dataloader()
         self.criterion = nn.CrossEntropyLoss()
         self.criterion = self.criterion.cuda() if torch.cuda.is_available() else self.criterion
         self.train_loader_super, self.train_loader_sub, self.valid_loader = self.build_dataloader()
+        self.set_seed()
 
     def build_dataloader(self):
+        num_workers = 32 if torch.cuda.is_available() else 4
         train_transform, valid_transform = utils._data_transforms_cifar10()
         train_data = dset.CIFAR10(root=self.data_path, train=True, download=True, transform=train_transform)
         valid_data = dset.CIFAR10(root=self.data_path, train=False, download=True, transform=valid_transform)
         train_loader_super = torch.utils.data.DataLoader(
-            train_data, batch_size=self.super_batch_size, shuffle=True, pin_memory=True, num_workers=32)
+            train_data, batch_size=self.super_batch_size, shuffle=True, pin_memory=True, num_workers=num_workers)
         train_loader_sub = torch.utils.data.DataLoader(
-            train_data, batch_size=self.sub_batch_size, shuffle=True, pin_memory=True, num_workers=32)
+            train_data, batch_size=self.sub_batch_size, shuffle=True, pin_memory=True, num_workers=num_workers)
         valid_loader = torch.utils.data.DataLoader(
-            valid_data, batch_size=1024, shuffle=False, pin_memory=True, num_workers=32)
+            valid_data, batch_size=1024, shuffle=False, pin_memory=True, num_workers=num_workers)
         return train_loader_super, train_loader_sub, valid_loader
 
     def set_seed(self):

@@ -15,12 +15,12 @@ search_config = dict(
     gcn_epochs=100,
     gcn_lr=0.001,
     loss_num=3,
-    generate_num=100,
+    generate_num=500,    #随机生成一个大池子，然后从中细选
     iterations=12,
-    bo_sample_num=100,
+    bo_sample_num=100,  #supernet 一次性覆盖的样本数
     sample_method="random",
     if_init_samples=True,
-    init_num=100,
+    init_num=100,   #要求随机初始化的样本数
 )
 
 training_config = dict(

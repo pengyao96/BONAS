@@ -25,7 +25,6 @@ class NasDataset(Dataset):
         self.train = train
         self.maxsize = maxsize
 
-
     def __len__(self):
         return len(self.graphs)
 
@@ -42,6 +41,7 @@ class NasDataset(Dataset):
         accuracy = np.array(self.graphs[graph_id]['metrics'] ,dtype=np.float32)
         sample = {'adjacency_matrix': adjacency_matrix, 'operations': operations, 'accuracy': accuracy,}
         return sample
+
     def normalize(self, mx):
         """Row-normalize sparse matrix"""
         rowsum = np.array(mx.sum(1))
@@ -99,7 +99,6 @@ class NasDataset(Dataset):
 
 
         return big_matrix
-
 
     def append_new_graph(self, new_graph):
         self.graphs += new_graph

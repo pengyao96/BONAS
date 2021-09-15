@@ -46,11 +46,11 @@ class Optimizer(object):
                          ifsigmoid=self.ifTransformSigmoid)
         self.gcn = neural_net.gcn
         # Extract features
-        train_features = self.extract_features(self.train_adj, self.train_features)
-        lm_dataset = (train_features, self.train_Y)
+        # train_features = self.extract_features(self.train_adj, self.train_features)
+        # lm_dataset = (train_features, self.train_Y)
         # Train and predict with linear_regressor
-        linear_regressor = lm.LinearRegressor(lm_dataset, intercept=False, ifTransformSigmoid=self.ifTransformSigmoid)
-        linear_regressor.train()
+        # linear_regressor = lm.LinearRegressor(lm_dataset, intercept=False, ifTransformSigmoid=self.ifTransformSigmoid)
+        # linear_regressor.train()
         time_ = time.time()
         print(f"train gcn time:{start - time_}")
 
@@ -120,7 +120,7 @@ class Optimizer(object):
         beta = -np.log(np.sqrt(2) + 1)
         sig = abs((hi_ci - prediction) / 2)
         E = self.sigmoid(prediction / np.sqrt(1 + gamma * sig ^ 2))
-        std = np.sqrt(self.sigmoid((alpha * (prediction + beta)) / np.sqrt(1 + gamma * alpha^2 * sig^2)) - E^2)
+        std = np.sqrt(self.sigmoid((alpha * (prediction + beta)) / np.sqrt(1 + gamma * alpha ^ 2 * sig ^ 2)) - E ^ 2)
         # aquisition function defined in paper
         ucb = E + 0.5 * std
         return ucb, std
@@ -185,7 +185,6 @@ class Optimizer(object):
         logging.info("selected indices:{}".format(str(select_indices)))
         logging.info("length of selects:{}".format(str(len(select_indices))))
         return newdataset, pred_acc, select_indices
-
 
     def update_data(self, new_dataset):
         self.__dataset = new_dataset
