@@ -1,6 +1,7 @@
 import os
+import time
 # modify the directory paths to get started
-taskname = "0915-supermodel_random_100"
+taskname = "supermodel_uniform_trainsuper-10_bo-100"
 local_root_dir = "./" # root working directory
 local_data_dir = "./" # data root
 results_dir = "trained_results"
