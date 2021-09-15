@@ -16,8 +16,8 @@ search_config = dict(
     gcn_epochs=100, #epochs to train the GCN using evaluated networks
     gcn_lr=0.001,
     loss_num=3,
-    generate_num=100,
-    iterations=500, # total number of search iterations, #evaluated networks = #iterations x bo_sample_num
+    generate_num=10000,
+    iterations=48, # total number of search iterations, #evaluated networks = #iterations x bo_sample_num
     bo_sample_num=100, # number of subnets to be selected in each BO iteration
     sample_method="random", # using random sampler or EA sampler
     if_init_samples=True, # whether use randomly selected models to initialize GCN predictor
