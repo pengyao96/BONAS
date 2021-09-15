@@ -184,11 +184,11 @@ class Runner(object):
                                                                                                 cap=self.bo_sample_num,
                                                                                                 trained_models=trained_models)
             self.train_super_model(selected_points)
-            logging.info(f"iter:{iteration}, current max:{self.max_acc}, max hash:{self.max_hash}")
-            logging.info("============================== Update GCN!! ==============================")
+            logging.info(f"iter{iteration},current max: {self.max_acc}, max hash {self.max_hash}")
+            logging.info("Update GCN!!")
             self.optimizer.retrain_NN()
-            # logging.info("============================== Update LR!! ==============================")
-            # self.optimizer.retrain_LR()
+            logging.info("Update LR!!")
+            self.optimizer.retrain_LR()
 
     def run(self):
         if self.mode == "supernet":

@@ -58,7 +58,6 @@ class Trainer:
         self.criterion = nn.CrossEntropyLoss()
         self.criterion = self.criterion.cuda() if torch.cuda.is_available() else self.criterion
         self.train_loader_super, self.train_loader_sub, self.valid_loader = self.build_dataloader()
-        self.set_seed()
 
     def build_dataloader(self):
         num_workers = 32 if torch.cuda.is_available() else 4
@@ -166,7 +165,7 @@ class Trainer:
         with torch.no_grad():
             for step, (input, target) in enumerate(self.valid_loader):
                 input = Variable(input).cuda() if torch.cuda.is_available() else Variable(input)
-                target = Variable(target).cuda(non_blocking=True) if torch.cuda.is_available() else Variable(target)
+                target = Variable(target).cuda(async=True) if torch.cuda.is_available() else Variable(target)
                 logits = model(input, mask=mask)
                 loss = self.criterion(logits, target)
                 prec1, prec5 = utils.accuracy(logits, target, topk=(1, 5))
@@ -189,7 +188,7 @@ class Trainer:
             else:
                 mask = random.choice(self.subnet_masks)
             input = Variable(input).cuda() if torch.cuda.is_available() else Variable(input)
-            target = Variable(target).cuda(non_blocking=True) if torch.cuda.is_available() else Variable(target)
+            target = Variable(target).cuda(async=True) if torch.cuda.is_available() else Variable(target)
             optimizer.zero_grad()
             logits = model(input, mask=mask)
             loss = self.criterion(logits, target)
