@@ -1,7 +1,7 @@
 import os
 import time
 # modify the directory paths to get started
-taskname = "supermodel_ea_uniform_trainsuper-10_bo-100"
+taskname = "supermodel_ea_uniform_trainsuper-5_bo-100"
 local_root_dir = "./" # root working directory
 local_data_dir = "./" # data root
 results_dir = "trained_results"
@@ -26,7 +26,7 @@ search_config = dict(
 )
 # configs for network training (evaluation)
 training_config = dict(
-    train_supernet_epochs=10, # epochs to train the supermodel (merged by subnets) as a whole
+    train_supernet_epochs=5, # epochs to train the supermodel (merged by subnets) as a whole
     data_path=os.path.join(local_data_dir, 'data'),
     super_batch_size=64,
     sub_batch_size=128,
