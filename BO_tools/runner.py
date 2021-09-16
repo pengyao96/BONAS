@@ -22,10 +22,10 @@ class Runner(object):
                  iterations=1000,
                  sample_method="random",
                  training_cfg=None,
-                 bo_sample_num=5,
+                 bo_sample_num=100,
                  mode="supernet",
                  if_init_samples=True,
-                 init_num=10,
+                 init_num=100,
                  eval_submodel_path = None
                  ):
         assert training_cfg is not None

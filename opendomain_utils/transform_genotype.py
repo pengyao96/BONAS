@@ -7,6 +7,7 @@ def transform_Genotype(adj, ops):
     adj = np.delete(adj, 3, axis=0)
     adj = np.delete(adj, 4, axis=0)
     adj = np.delete(adj, 5, axis=0)
+    #TODO 删掉原始矩阵的2，4，6，8行；仅保留0，1，3，5，7，9，10行
     cell = [
         (OPS[np.nonzero(ops[2])[0][0]], np.nonzero(adj[:, 2])[0][0]),
         (OPS[np.nonzero(ops[3])[0][0]], np.nonzero(adj[:, 3])[0][0]),
@@ -47,7 +48,7 @@ def geno_to_archs(genotypes, ei_scores=None):
     # print(genotypes)
     archs = []
     for i in range(len(genotypes)):
-        if isinstance(genotypes, str):
+        if isinstance(genotypes[i], str):
             adj, op = transform_matrix(eval(genotypes[i]))
         else:
             adj, op = transform_matrix(genotypes[i])
@@ -73,6 +74,7 @@ def geno2mask(genotype):
     return mask
 
 if __name__ == '__main__':
+    #TODO: 两个输入，一个输出，中间8个节点(4个block*2个节点)
     A = np.array([
         [0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -86,21 +88,22 @@ if __name__ == '__main__':
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ])
+    # TODO: Input OP1 OP2 OP3 Output
     ops = np.array([
-        [1, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 0, 0, 1],
+        [1, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0],
+        [0, 1, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 1],
     ])
     geno = transform_Genotype(A, ops)
     print(geno.normal)
     # print(geno.ops)
-    # print(transform_matrix(geno) - A)
+    # print(transform_matrix(geno)[0] - A)
     print(transform_matrix(geno)[1] - ops)
