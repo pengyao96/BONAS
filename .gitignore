@@ -9,6 +9,7 @@ __pycache__/
 *.so
 /data
 /trained_results
+/fully_train/trained_results
 
 # Distribution / packaging
 .Python
