@@ -61,7 +61,7 @@ def geno_to_archs(genotypes, ei_scores=None):
 
 def geno2mask(genotype):
     des = -1
-    mask = np.zeros(14, 8)
+    mask = np.zeros([14, 8])
     op_names, indices = zip(*genotype.normal)
     for cnt, (name, index) in enumerate(zip(op_names, indices)):
         if cnt % 2 == 0:
@@ -74,7 +74,7 @@ def geno2mask(genotype):
     return mask
 
 if __name__ == '__main__':
-    #TODO: 两个输入，一个输出，中间8个节点(4个block*2个节点)
+    #TODO: 11*11
     A = np.array([
         [0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -88,7 +88,7 @@ if __name__ == '__main__':
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     ])
-    # TODO: Input OP1 OP2 OP3 Output
+    # TODO: 11*6
     ops = np.array([
         [1, 0, 0, 0, 0, 0],
         [1, 0, 0, 0, 0, 0],
@@ -103,7 +103,9 @@ if __name__ == '__main__':
         [0, 0, 0, 0, 0, 1],
     ])
     geno = transform_Genotype(A, ops)
+    mask = geno2mask(geno)
     print(geno.normal)
+    print(mask)
     # print(geno.ops)
     # print(transform_matrix(geno)[0] - A)
-    print(transform_matrix(geno)[1] - ops)
+    #print(transform_matrix(geno)[1] - ops)

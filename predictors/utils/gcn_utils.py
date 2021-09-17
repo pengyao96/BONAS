@@ -3,6 +3,7 @@ import numpy as np
 def add_global_node( mx, ifAdj):
     """add a global node to operation or adjacency matrixs, fill diagonal for adj and transpose adjs"""
     if (ifAdj):
+
         mx = np.column_stack((mx, np.ones(mx.shape[0], dtype=np.float32)))
         mx = np.row_stack((mx, np.zeros(mx.shape[1], dtype=np.float32)))
         np.fill_diagonal(mx, 1)
@@ -60,4 +61,4 @@ if __name__=="__main__":
     print(a.shape)
     a = padzero(np.array(a), True, maxsize=11)
     print(a.shape)
-    # add_global_node(padzero(np.array(a['adjacency_matrix']), True, maxsize=11), True)
+    add_global_node(a, True)

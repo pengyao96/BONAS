@@ -10,7 +10,7 @@ import torch
 import torch.nn.functional as F
 import logging
 
-
+from ipdb import set_trace as st
 class Optimizer(object):
 
     def __init__(self, dataset, val_set=None, ifPretrain=False, ifTransformSigmoid=True, ifFindMax=True,
