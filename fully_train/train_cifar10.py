@@ -1,5 +1,6 @@
 import os
 import sys
+sys.path.append('../')
 import time
 import glob
 import numpy as np
@@ -21,6 +22,7 @@ from settings import local_data_dir, local_root_dir, results_dir, taskname
 import pickle
 from opendomain_utils.listdict import ListDict
 from ipdb import set_trace as st
+
 def create_exp_dir(path):
     if not os.path.exists(path):
         os.makedirs(path)
