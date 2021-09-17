@@ -1,7 +1,7 @@
 import numpy as np
 from opendomain_utils.genotypes import Genotype, PRIMITIVES
 from settings import OPS
-
+from ipdb import set_trace as st
 def transform_Genotype(adj, ops):
     adj = np.delete(adj, 2, axis=0)
     adj = np.delete(adj, 3, axis=0)

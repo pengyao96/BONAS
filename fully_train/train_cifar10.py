@@ -8,7 +8,7 @@ import opendomain_utils.training_utils as utils
 import logging
 import argparse
 import torch.nn as nn
-from opendomain_utils.genotypes import Genotype
+from opendomain_utils.genotypes import *
 import torch.utils
 import torchvision.datasets as dset
 import torch.backends.cudnn as cudnn
@@ -20,7 +20,7 @@ import shutil
 from settings import local_data_dir, local_root_dir, results_dir, taskname
 import pickle
 from opendomain_utils.listdict import ListDict
-
+from ipdb import set_trace as st
 def create_exp_dir(path):
     if not os.path.exists(path):
         os.makedirs(path)
@@ -28,7 +28,7 @@ def create_exp_dir(path):
 
 
 parser = argparse.ArgumentParser("cifar")
-parser.add_argument('--data', type=str, default=os.path.join(local_data_dir, 'data'),
+parser.add_argument('--data', type=str, default=os.path.join('../', local_data_dir, 'data'),
                     help='location of the data corpus')
 parser.add_argument('--batch_size', type=int, default=96, help='batch size')
 parser.add_argument('--learning_rate', type=float, default=0.025, help='init learning rate')
@@ -75,10 +75,6 @@ class SoftTargetCrossEntropy(nn.Module):
 
 
 def main():
-    if not torch.cuda.is_available():
-        logging.info('no gpu device available')
-        sys.exit(1)
-
     np.random.seed(args.seed)
     cudnn.benchmark = True
     torch.manual_seed(args.seed)
@@ -89,14 +85,18 @@ def main():
 
     genotype = eval(args.arch)
     print(genotype)
+
     model = Network(args.init_channels, CIFAR_CLASSES, args.layers, args.auxiliary, genotype)
-    model = model.cuda()
+    criterion = nn.CrossEntropyLoss()
+    num_workers = 4
+    if torch.cuda.is_available():
+        model = model.cuda()
+        criterion = criterion.cuda()
+        num_workers = 32
+
     total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(total_params)
     logging.info("param size = %fMB", utils.count_parameters_in_MB(model))
-
-    criterion = nn.CrossEntropyLoss()
-    criterion = criterion.cuda()
     optimizer = torch.optim.SGD(
         model.parameters(),
         args.learning_rate,
@@ -106,12 +106,11 @@ def main():
     train_transform, valid_transform = utils._data_transforms_cifar10()
     train_data = dset.CIFAR10(root=args.data, train=True, download=True, transform=train_transform)
     valid_data = dset.CIFAR10(root=args.data, train=False, download=True, transform=valid_transform)
-
     train_queue = torch.utils.data.DataLoader(
-        train_data, batch_size=args.batch_size, shuffle=True, pin_memory=True, num_workers=32, )
+        train_data, batch_size=args.batch_size, shuffle=True, pin_memory=True, num_workers=num_workers )
 
     valid_queue = torch.utils.data.DataLoader(
-        valid_data, batch_size=args.batch_size, shuffle=False, pin_memory=True, num_workers=32)
+        valid_data, batch_size=args.batch_size, shuffle=False, pin_memory=True, num_workers=num_workers)
 
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, float(args.epochs))
     max_acc = 0
@@ -146,7 +145,7 @@ def train(train_queue, model, criterion, optimizer):
 
     for step, (input, target) in enumerate(train_queue):
         input = Variable(input).cuda() if torch.cuda.is_available() else Variable(input)
-        target = Variable(target).cuda(async=True) if torch.cuda.is_available() else Variable(target)
+        target = Variable(target).cuda() if torch.cuda.is_available() else Variable(target)
 
         optimizer.zero_grad()
         logits, logits_aux = model(input)
@@ -178,7 +177,7 @@ def infer(valid_queue, model, criterion):
 
     for step, (input, target) in enumerate(valid_queue):
         input = Variable(input).cuda()
-        target = Variable(target).cuda(async=True)
+        target = Variable(target).cuda()
 
         logits, _ = model(input)
         loss = criterion(logits, target)

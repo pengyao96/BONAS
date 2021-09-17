@@ -1,7 +1,7 @@
 from opendomain_utils.operations import *
 from opendomain_utils.training_utils import drop_path
 
-
+from ipdb import set_trace as st
 class Cell(nn.Module):
 
     def __init__(self, genotype, C_prev_prev, C_prev, C, reduction, reduction_prev):

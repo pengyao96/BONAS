@@ -20,7 +20,7 @@ search_config = dict(
     generate_num=10000,
     iterations=48, # total number of search iterations, #evaluated networks = #iterations x bo_sample_num
     bo_sample_num=100, # number of subnets to be selected in each BO iteration
-    sample_method="ea", # using random sampler or EA sampler
+    sample_method="random", # using random sampler or EA sampler
     if_init_samples=True, # whether use randomly selected models to initialize GCN predictor
     init_num=100,
 )
