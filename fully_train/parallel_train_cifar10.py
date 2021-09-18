@@ -12,7 +12,7 @@ tasks = []
 
 for gpu in range(gpu_num):
     cmd = [python_path, os.path.join('./', 'train_cifar10.py'), f"--gpu={gpu}", f"--arch=exp_BONAS_{gpu+8}",
-           f"--save={gpu+16}"]
+           f"--save={gpu+16}, --auxiliary"]
     train = subprocess.Popen(cmd)
     tasks.append(train)
 for task in tasks:
