@@ -151,3 +151,9 @@ exp_BONAS_7 = Genotype(
             ('skip_connect', 2), ('dil_conv_3x3', 4), ('max_pool_3x3', 1)], normal_concat=[2, 3, 4, 5],
     reduce=[('sep_conv_3x3', 0), ('sep_conv_3x3', 1), ('skip_connect', 0), ('max_pool_3x3', 2), ('max_pool_3x3', 0),
             ('skip_connect', 2), ('dil_conv_3x3', 4), ('max_pool_3x3', 1)], reduce_concat=[2, 3, 4, 5])
+
+exp_BONAS_8 = DARTS_V1
+exp_BONAS_9 = DARTS_V2
+exp_BONAS_10 = BONAS
+exp_BONAS_11 = NASNet
+exp_BONAS_12 = AmoebaNet

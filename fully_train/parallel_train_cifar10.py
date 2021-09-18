@@ -7,12 +7,12 @@ import os
 import subprocess
 
 python_path = 'python'  # path of python command
-gpu_num = 8
+gpu_num = 5
 tasks = []
 
 for gpu in range(gpu_num):
-    cmd = [python_path, os.path.join('./', 'train_cifar10.py'), f"--gpu={gpu}", f"--arch=exp_BONAS_{gpu}",
-           f"--save={gpu+8}"]
+    cmd = [python_path, os.path.join('./', 'train_cifar10.py'), f"--gpu={gpu}", f"--arch=exp_BONAS_{gpu+8}",
+           f"--save={gpu+16}"]
     train = subprocess.Popen(cmd)
     tasks.append(train)
 for task in tasks:

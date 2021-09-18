@@ -26,7 +26,7 @@ from ipdb import set_trace as st
 def create_exp_dir(path):
     if not os.path.exists(path):
         os.makedirs(path)
-    print('Experiment dir : {}'.format(path))
+    logging.info('Experiment dir : {}'.format(path))
 
 
 parser = argparse.ArgumentParser("cifar")
@@ -86,7 +86,7 @@ def main():
     logging.info("args = %s", args)
 
     genotype = eval(args.arch)
-    print(genotype)
+    logging.info('genotype:', genotype)
 
     model = Network(args.init_channels, CIFAR_CLASSES, args.layers, args.auxiliary, genotype)
     criterion = nn.CrossEntropyLoss()
@@ -97,7 +97,7 @@ def main():
         num_workers = 32
 
     total_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-    print(total_params)
+    logging.info('total_params = ', total_params)
     logging.info("param size = %fMB", utils.count_parameters_in_MB(model))
     optimizer = torch.optim.SGD(
         model.parameters(),
