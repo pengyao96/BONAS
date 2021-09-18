@@ -7,7 +7,7 @@ import os
 import subprocess
 
 python_path = 'python'  # path of python command
-gpu_num = 5
+gpu_num = 1
 tasks = []
 
 for gpu in range(gpu_num):
