@@ -71,6 +71,7 @@ AmoebaNet = Genotype(
     reduce_concat=[3, 4, 6]
 )
 
+
 DARTS_V1 = Genotype(
     normal=[('sep_conv_3x3', 1), ('sep_conv_3x3', 0), ('skip_connect', 0), ('sep_conv_3x3', 1), ('skip_connect', 0),
             ('sep_conv_3x3', 1), ('sep_conv_3x3', 0), ('skip_connect', 2)], normal_concat=[2, 3, 4, 5],
@@ -104,6 +105,8 @@ BONAS = Genotype(
     reduce_concat=[2, 3, 4, 5])
 
 #########################################
+#log0-7 epoch 100
+#log8-15 epoch 600
 exp_BONAS_0 = Genotype(
     normal=[('sep_conv_3x3', 1), ('sep_conv_3x3', 0), ('skip_connect', 2), ('max_pool_3x3', 1), ('sep_conv_3x3', 3),
             ('skip_connect', 1), ('max_pool_3x3', 2), ('max_pool_3x3', 0)], normal_concat=[2, 3, 4, 5],
@@ -152,8 +155,8 @@ exp_BONAS_7 = Genotype(
     reduce=[('sep_conv_3x3', 0), ('sep_conv_3x3', 1), ('skip_connect', 0), ('max_pool_3x3', 2), ('max_pool_3x3', 0),
             ('skip_connect', 2), ('dil_conv_3x3', 4), ('max_pool_3x3', 1)], reduce_concat=[2, 3, 4, 5])
 
-exp_BONAS_8 = DARTS_V1
-exp_BONAS_9 = DARTS_V2
-exp_BONAS_10 = BONAS
-exp_BONAS_11 = NASNet
-exp_BONAS_12 = AmoebaNet
+exp_BONAS_8 = DARTS_V1   #log16- 96.15999755859374     log21-aux 96.5299975341796
+exp_BONAS_9 = DARTS_V2    #log17- 96.02999721679687     log22-aux 96.55999775390625
+exp_BONAS_10 = BONAS      #log18- 96.03999770507812     log23-aux 96.50999772949218
+exp_BONAS_11 = NASNet   #log19- 96.209997              log24-aux 96.44999768066407
+exp_BONAS_12 = AmoebaNet   #log20- 96.30999755859375     log25-aux 96.6199973876953
