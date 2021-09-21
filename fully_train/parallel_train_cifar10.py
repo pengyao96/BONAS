@@ -12,8 +12,8 @@ tasks = []
 
 for gpu in range(gpu_num):
     seed = random.randint(1,10000)
-    cmd = [python_path, os.path.join('./', 'train_cifar10.py'), f"--gpu={gpu}", f"--arch=exp_BONAS_13",
-           f"--save={gpu+34}", "--auxiliary", f"--seed={seed}"]
+    cmd = [python_path, os.path.join('./', 'train_cifar10.py'), f"--gpu={gpu}", f"--arch=exp_BONAS_14",
+           f"--save={gpu+40}", "--auxiliary", f"--seed={seed}"]
     train = subprocess.Popen(cmd)
     tasks.append(train)
 for task in tasks:
