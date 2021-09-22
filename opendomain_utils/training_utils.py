@@ -1,6 +1,7 @@
 '''
 Used for training archs
 '''
+import logging
 import os
 import numpy as np
 import torch
@@ -71,6 +72,7 @@ def _data_transforms_cifar10(args):
     transforms.Normalize(CIFAR_MEAN, CIFAR_STD),
   ])
   if args.cutout:
+    logging.info('Use cutout data augmentation !!!')
     train_transform.transforms.append(Cutout(args.cutout_length))
 
   valid_transform = transforms.Compose([

@@ -7,13 +7,13 @@ import os
 import subprocess
 import random
 python_path = 'python'  # path of python command
-gpu_num = 6
+gpu_num = 4
 tasks = []
 
 for gpu in range(gpu_num):
     # seed = random.randint(1,10000)
-    cmd = [python_path, os.path.join('./', 'train_cifar10.py'), f"--gpu={gpu}", f"--arch=exp_BONAS_{gpu+7}",
-           f"--save={gpu+46}", "--auxiliary", f"--cutout"]
+    cmd = [python_path, os.path.join('./', 'train_cifar10.py'), f"--gpu={gpu}", f"--arch=raw_BONAS_{gpu}",
+           f"--save=raw_{gpu}", "--auxiliary", f"--cutout"]
     train = subprocess.Popen(cmd)
     tasks.append(train)
 for task in tasks:
