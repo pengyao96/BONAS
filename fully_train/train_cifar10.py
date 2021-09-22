@@ -105,7 +105,11 @@ def main():
         momentum=args.momentum,
         weight_decay=args.weight_decay
     )
-    train_transform, valid_transform = utils._data_transforms_cifar10()
+    if args.cutout:
+        train_transform, valid_transform = utils._data_transforms_cifar10_full(args.cutout_length)
+    else:
+        train_transform, valid_transform = utils._data_transforms_cifar10()
+
     train_data = dset.CIFAR10(root=args.data, train=True, download=True, transform=train_transform)
     valid_data = dset.CIFAR10(root=args.data, train=False, download=True, transform=valid_transform)
     train_queue = torch.utils.data.DataLoader(

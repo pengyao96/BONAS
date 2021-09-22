@@ -78,7 +78,7 @@ def _data_transforms_cifar10():
     ])
   return train_transform, valid_transform
 
-def _data_transforms_cifar10_full():
+def _data_transforms_cifar10_full(cutout_length):
   CIFAR_MEAN = [0.49139968, 0.48215827, 0.44653124]
   CIFAR_STD = [0.24703233, 0.24348505, 0.26158768]
 
@@ -88,7 +88,7 @@ def _data_transforms_cifar10_full():
     transforms.ToTensor(),
     transforms.Normalize(CIFAR_MEAN, CIFAR_STD),
   ])
-  train_transform.transforms.append(Cutout(16))
+  train_transform.transforms.append(Cutout(cutout_length))
 
   valid_transform = transforms.Compose([
     transforms.ToTensor(),
