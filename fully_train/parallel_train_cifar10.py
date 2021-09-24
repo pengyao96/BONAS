@@ -32,7 +32,12 @@ print(f"Num of Tasks finished:{len(tasks)}")
 # python train_cifar10.py --gpu=7 --arch=raw_BONAS_0 --save=raw_7 --seed=1233 --auxiliary  --cutout
 
 
-# python train_cifar10.py --gpu=0 --arch=raw_BONAS_0 --save=raw_8 --seed=0 --batch_size 128 --epochs 1200 --auxiliary  --cutout
+# python train_cifar10.py --gpu=0 --arch=raw_BONAS_0 --save=xx_0 --seed=0 --batch_size 128 --epochs 1200 --auxiliary  --cutout
 
-# python train_cifar10.py --gpu=2 --arch=xx_BONAS_0 --save=raw_0 --seed=123 --auxiliary  --cutout
-# python train_cifar10.py --gpu=3 --arch=xx_BONAS_0 --save=raw_0 --seed=123 --auxiliary  --cutout
+# python train_cifar10.py --gpu=2 --arch=xx_BONAS_0 --save=xx_0 --seed=11 --auxiliary  --cutout
+# python train_cifar10.py --gpu=3 --arch=xx_BONAS_1 --save=xx_1 --seed=11 --auxiliary  --cutout
+# python train_cifar10.py --gpu=4 --arch=xx_BONAS_0 --save=xx_3 --seed=11 --batch_size 128 --epochs 1200 --auxiliary  --cutout
+
+# python train_cifar10.py --gpu=5 --arch=raw_BONAS_1 --save=xx_4 --seed=11 --auxiliary  --cutout
+# python train_cifar10.py --gpu=6 --arch=raw_BONAS_2 --save=xx_5 --seed=11 --auxiliary  --cutout
+# python train_cifar10.py --gpu=7 --arch=raw_BONAS_3 --save=xx_6 --seed=11 --auxiliary  --cutout
