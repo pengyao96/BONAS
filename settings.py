@@ -2,7 +2,7 @@ import os
 import time
 
 # modify the directory paths to get started
-taskname = "supermodel_uniform"
+taskname = "supermodel_random"
 local_root_dir = "./"  # root working directory
 local_data_dir = "./"  # data root
 results_dir = "trained_results"
@@ -35,14 +35,14 @@ training_config = dict(
     momentum=0.9,
     weight_decay=3e-4,
     report_freq=50,
-    epochs=100, # total training epochs for each BO iteration
+    epochs=100,  # total training epochs for each BO iteration
     init_channels=36,
     layers=20,
     drop_path_prob=0.2,
     seed=0,
     grad_clip=5,
     parallel=False,
-    mode='uniform' # use uniform sampling or random sampling for subnet training
+    mode='random'  # use uniform sampling or random sampling for subnet training
 )
 
 distributed = False
