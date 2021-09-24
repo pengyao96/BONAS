@@ -25,5 +25,5 @@ if torch.cuda.is_available():
         task.wait()
     print(f"Num of Tasks finished:{len(tasks)}")
 else:
-    cmd = 'python BOGCN_opendomain.py --gpu 0'
+    cmd = 'python BOGCN_opendomain.py --gpu 0 '
     os.system(cmd)
