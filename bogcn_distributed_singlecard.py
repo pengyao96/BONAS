@@ -13,7 +13,7 @@ from settings import local_root_dir
 
 create_dirs()
 
-if torch.cuda.is_available():
+if torch.cuda.is_available() and False:
     python_path = 'python'  # path of python command
     gpu_num = 1
     tasks = []
@@ -25,5 +25,5 @@ if torch.cuda.is_available():
         task.wait()
     print(f"Num of Tasks finished:{len(tasks)}")
 else:
-    cmd = 'python BOGCN_opendomain.py --gpu 0'
+    cmd = 'python BOGCN_opendomain.py --gpu 1'
     os.system(cmd)
