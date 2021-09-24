@@ -15,7 +15,7 @@ create_dirs()
 
 if torch.cuda.is_available():
     python_path = 'python'  # path of python command
-    gpu_num = 8
+    gpu_num = 0
     tasks = []
     for gpu in range(gpu_num):
         cmd = [python_path, os.path.join(local_root_dir, 'BOGCN_opendomain.py'), f"--gpu={gpu}"]

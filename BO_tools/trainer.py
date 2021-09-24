@@ -61,7 +61,7 @@ class Trainer:
 
     def build_dataloader(self):
         num_workers = 32 if torch.cuda.is_available() else 4
-        train_transform, valid_transform = utils._data_transforms_cifar10()
+        train_transform, valid_transform = utils._data_transforms_cifar10(None)
         train_data = dset.CIFAR10(root=self.data_path, train=True, download=True, transform=train_transform)
         valid_data = dset.CIFAR10(root=self.data_path, train=False, download=True, transform=valid_transform)
         train_loader_super = torch.utils.data.DataLoader(
