@@ -1,9 +1,10 @@
 import os
 import time
+
 # modify the directory paths to get started
-taskname = "supermodel_uniform_trainsuper-10_bo-100"
-local_root_dir = "./" # root working directory
-local_data_dir = "./" # data root
+taskname = "supermodel_uniform"
+local_root_dir = "./"  # root working directory
+local_data_dir = "./"  # data root
 results_dir = "trained_results"
 trained_pickle_file = "trained_models.pkl"
 trained_csv_file = "trained_models.csv"
