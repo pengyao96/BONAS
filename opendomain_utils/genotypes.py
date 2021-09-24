@@ -111,17 +111,19 @@ exp_BONAS_11 = NASNet  # log19- 96.209997              log24-aux 96.449997680664
 exp_BONAS_12 = AmoebaNet  # log20- 96.30999755859375     log25-aux 96.6199973876953
 
 # 0.9229000018310546
-exp_BONAS_13 = Genotype(
+xx_BONAS_0 = Genotype(
     normal=[('sep_conv_3x3', 0), ('sep_conv_3x3', 1), ('max_pool_3x3', 0), ('skip_connect', 2), ('max_pool_3x3', 3),
             ('sep_conv_3x3', 1), ('skip_connect', 0), ('skip_connect', 2)], normal_concat=[2, 3, 4, 5],
     reduce=[('sep_conv_3x3', 0), ('sep_conv_3x3', 1), ('max_pool_3x3', 0), ('skip_connect', 2), ('max_pool_3x3', 3),
             ('sep_conv_3x3', 1), ('skip_connect', 0), ('skip_connect', 2)], reduce_concat=[2, 3, 4, 5])
 # 0.9261
-exp_BONAS_14 = Genotype(
+xx_BONAS_1 = Genotype(
     normal=[('sep_conv_3x3', 1), ('sep_conv_3x3', 0), ('sep_conv_3x3', 0), ('max_pool_3x3', 2), ('sep_conv_3x3', 2),
             ('max_pool_3x3', 3), ('dil_conv_3x3', 0), ('skip_connect', 2)], normal_concat=[2, 3, 4, 5],
     reduce=[('sep_conv_3x3', 1), ('sep_conv_3x3', 0), ('sep_conv_3x3', 0), ('max_pool_3x3', 2), ('sep_conv_3x3', 2),
             ('max_pool_3x3', 3), ('dil_conv_3x3', 0), ('skip_connect', 2)], reduce_concat=[2, 3, 4, 5])
+
+
 
 raw_BONAS_0 = Genotype(
     normal=[('dil_conv_3x3', 0), ('sep_conv_3x3', 0), ('sep_conv_3x3', 0), ('sep_conv_3x3', 1), ('max_pool_3x3', 1),

@@ -33,3 +33,6 @@ print(f"Num of Tasks finished:{len(tasks)}")
 
 
 # python train_cifar10.py --gpu=0 --arch=raw_BONAS_0 --save=raw_8 --seed=0 --batch_size 128 --epochs 1200 --auxiliary  --cutout
+
+python
+train_cifar10.py - -gpu = 2 - -arch = xx_BONAS_0 - -save = raw_0 - -seed = 123 - -auxiliary - -cutout
