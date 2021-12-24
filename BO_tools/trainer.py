@@ -16,7 +16,6 @@ DataParallel = torch.nn.parallel.DistributedDataParallel if distributed else tor
 from itertools import cycle, islice
 from opendomain_utils.bn_utils import set_running_statistics
 import copy
-from ipdb import set_trace as st
 CIFAR_CLASSES = 10
 
 class Trainer:
@@ -54,7 +53,7 @@ class Trainer:
         self.drop_path_prob = drop_path_prob
         self.seed = seed
         self.grad_clip = grad_clip
-        # self.build_dataloader()
+        self.build_dataloader()
         self.criterion = nn.CrossEntropyLoss()
         self.criterion = self.criterion.cuda() if torch.cuda.is_available() else self.criterion
         self.train_loader_super, self.train_loader_sub, self.valid_loader = self.build_dataloader()

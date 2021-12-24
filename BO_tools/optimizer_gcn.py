@@ -187,6 +187,7 @@ class Optimizer(object):
         logging.info("length of selects:{}".format(str(len(select_indices))))
         return newdataset, pred_acc, select_indices
 
+
     def update_data(self, new_dataset):
         self.__dataset = new_dataset
         self.__train_dataset = self.__dataset

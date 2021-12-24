@@ -96,7 +96,7 @@ def infer(valid_queue, model, criterion):
 
   for step, (input, target) in enumerate(valid_queue):
     input = Variable(input, volatile=True).cuda() if torch.cuda.is_available() else Variable(input, volatile=True)
-    target = Variable(target, volatile=True).cuda(async=True) if torch.cuda.is_available() else Variable(target, volatile=True)
+    target = Variable(target, volatile=True).cuda() if torch.cuda.is_available() else Variable(target, volatile=True)
 
     logits, _ = model(input)
     loss = criterion(logits, target)

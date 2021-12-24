@@ -12,7 +12,7 @@ from samplers import EASampler, RandomSampler
 import numpy as np
 from BO_tools.trainer import Trainer
 
-from ipdb import set_trace as st
+
 class Runner(object):
     def __init__(self,
                  gcn_epochs=100,
@@ -110,7 +110,6 @@ class Runner(object):
                 :param data_points: list<dict<adj,ops>>
                 :return:trained accs and hashes of subnets
                 '''
-
         genotypes = [transform_Genotype(data_point['adjacency_matrix'], data_point['operations']) for data_point in
                      data_points]
         eval_genotypes = None
