@@ -149,7 +149,7 @@ class Trainer:
             supernet_copy = copy.deepcopy(supernet)
             i=1
             for mask, genotype in zip(subnet_masks, genotypes):
-                set_running_statistics(supernet_copy, self.train_loader_sub, mask)
+                # set_running_statistics(supernet_copy, self.train_loader_sub, mask)
                 obj, top1, top5 = self.evaluate(supernet_copy, mask)
                 logging.info('%s th Arch %s valid %e %f %f',str(i), str(genotype.normal), obj, top1, top5)
                 results.append((genotype, top1))
