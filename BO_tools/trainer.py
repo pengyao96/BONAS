@@ -123,9 +123,9 @@ class Trainer:
             else:
                 self.train(supernet, optimizer, supernet=False)
             scheduler.step()
-
-            logging.info("Evaluating subnets ...")
-            results = self.evaluate_subnets(supernet, self.subnet_masks, self.genotypes, self.eval_genos)
+            if epoch>2:
+                logging.info("Evaluating subnets ...")
+                results = self.evaluate_subnets(supernet, self.subnet_masks, self.genotypes, self.eval_genos)
         return results
 
     def train_supernet(self, model, optimizer, epoch):
